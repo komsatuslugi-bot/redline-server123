@@ -1,0 +1,32 @@
+name: Clean repo
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Remove everything except .dockerignore and this workflow
+        run: |
+          find . -mindepth 1 \
+            ! -path './.git' \
+            ! -path './.git/*' \
+            ! -path './.dockerignore' \
+            ! -path './.github' \
+            ! -path './.github/workflows' \
+            ! -path './.github/workflows/clean.yml' \
+            -exec rm -rf {} +
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "clean repo" || echo "nothing to commit"
+          git push
