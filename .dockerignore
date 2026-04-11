@@ -1,0 +1,7 @@
+.git
+.gitignore
+.godot
+*.import
+*.uid
+*.exe
+*.pck
