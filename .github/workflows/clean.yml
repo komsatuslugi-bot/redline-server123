@@ -7,12 +7,11 @@ jobs:
   clean:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Remove everything except .dockerignore
         run: |
-          shopt -s extglob
-          rm -rf !( .dockerignore )
+          find . -mindepth 1 ! -name '.dockerignore' ! -name '.git' -exec rm -rf {} +
 
       - name: Commit changes
         run: |
