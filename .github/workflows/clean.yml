@@ -1,0 +1,23 @@
+name: Clean repo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Remove everything except .dockerignore
+        run: |
+          shopt -s extglob
+          rm -rf !( .dockerignore )
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "clean repo" || echo "nothing to commit"
+          git push
