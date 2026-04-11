@@ -1,7 +1,9 @@
 .git
 .gitignore
 .godot
-*.import
+android
+Redline*.exe
+Redline*.pck
 *.uid
-*.exe
-*.pck
+*.import
+make_clean_buttons.ps1
