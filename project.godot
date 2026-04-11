@@ -1,0 +1,6 @@
+﻿config_version=5
+
+[application]
+config/name="Redline Railway Server"
+run/main_scene="res://dedicated_server.tscn"
+config/features=PackedStringArray("4.6")
