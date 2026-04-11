@@ -8,7 +8,7 @@ const KILL_REWARD_PVP: int = 500
 const START_MONEY_PVP: int = 800
 const ARMOR_PRICE_PVP: int = 650
 const MAG_PRICE_PVP: int = 100
-const GRENADE_PRICE_PVP: int = 300
+const GRENADE_PRICE_PVP: int = 100
 const UNLOCK_AK_PRICE_PVP: int = 1800
 const UNLOCK_GLOCK_PRICE_PVP: int = 900
 const MAX_SPARE_MAGS_PER_WEAPON_PVP: int = 5
@@ -688,7 +688,7 @@ func _server_apply_buy(peer_id: int, action_id: String) -> void:
 			if money_now >= ARMOR_PRICE_PVP and int(s.get("armor", 0)) < 100:
 				money_now -= ARMOR_PRICE_PVP
 				s["armor"] = 100
-		"grenade":
+		"grenade_palak", "grenade_smoke", "grenade_flash", "grenade_gas", "grenade_he":
 			if money_now >= GRENADE_PRICE_PVP:
 				money_now -= GRENADE_PRICE_PVP
 		"mag_ak":

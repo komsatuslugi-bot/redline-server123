@@ -1,4 +1,4 @@
-﻿FROM ubuntu:24.04
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV GODOT_VERSION=4.6-stable

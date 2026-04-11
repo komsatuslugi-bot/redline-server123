@@ -1,0 +1,57 @@
+Redline + Railway (prosty setup krok po kroku)
+==============================================
+
+Co zrobilem w kodzie
+--------------------
+1. Multiplayer jest przerobiony na WebSocket (pod Railway).
+2. Serwer czyta port z zmiennej PORT (Railway ustawia to automatycznie).
+3. W grze JOIN przyjmuje:
+   - pelny URL, np. wss://twoja-app.up.railway.app
+   - albo sam host (dla Railway automatycznie zrobi wss://).
+
+Pliki potrzebne do Railway
+--------------------------
+- Dockerfile
+- dedicated_server.gd
+- dedicated_server.tscn
+
+Jak to odpalic na Railway
+-------------------------
+1. Wrzuc projekt na GitHub (repo).
+2. Wejdz na Railway i kliknij:
+   - New Project
+   - Deploy from GitHub repo
+   - wybierz to repo
+3. Railway wykryje Dockerfile i zbuduje kontener.
+4. Po deploy:
+   - wejdz w service
+   - Settings -> Networking
+   - kliknij Generate Domain
+   - dostaniesz adres typu: xxx.up.railway.app
+5. W Variables nic nie musisz wpisywac (PORT daje Railway sam).
+
+Jak dolaczyc z gry
+------------------
+1. Uruchom gre.
+2. PLAY -> ONLINE.
+3. W pole wpisz:
+   wss://twoja-domena-z-railway.up.railway.app
+4. Kliknij JOIN.
+
+Test lokalny (bez Railway)
+--------------------------
+1. Odpal lokalnie serwer:
+   godot --headless --path "C:\sciezka\redline-(copy)" --main-scene res://dedicated_server.tscn
+2. W grze wpisz:
+   ws://127.0.0.1:2457
+3. JOIN
+
+Najczestsze problemy
+--------------------
+1. Build fail:
+   - sprawdz czy Dockerfile jest w glownym katalogu repo.
+2. Error connect:
+   - sprawdz czy domena Railway jest aktywna
+   - sprawdz czy wpisujesz wss:// dla Railway
+3. Klient laczy, ale nic nie widac:
+   - uruchom 2 klienty i sprawdz czy oba lacza sie do tej samej domeny.

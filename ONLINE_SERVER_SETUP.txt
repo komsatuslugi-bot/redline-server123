@@ -1,0 +1,62 @@
+Redline online server setup (legacy ENet notes)
+==============================================
+
+UWAGA:
+Ta instrukcja jest stara (ENet/UDP).
+Aktualna instrukcja dla Railway/WebSocket jest tutaj:
+RAILWAY_SETUP_PL.txt
+
+What you need
+-------------
+1. Full project folder (same as your game), containing:
+   - res://dedicated_server.gd
+   - res://dedicated_server.tscn
+2. Godot 4.6 executable on the server machine.
+3. Open UDP port 2457 on firewall/router.
+
+Server port
+-----------
+- Default: UDP 2457
+
+Windows server (step by step)
+-----------------------------
+1. Copy whole project folder to server, for example:
+   C:\games\redline
+2. Open Windows Firewall and allow inbound UDP 2457.
+3. Start PowerShell in project folder and run:
+   godot.windows.editor.x86_64.exe --headless --path "C:\games\redline" --main-scene res://dedicated_server.tscn
+4. If it started correctly, you should see:
+   Redline dedicated server listening on port 2457
+
+Linux server (step by step)
+---------------------------
+1. Copy whole project folder to server, for example:
+   /opt/redline
+2. Open UDP 2457 in firewall (ufw example):
+   sudo ufw allow 2457/udp
+3. Run server:
+   godot4 --headless --path /opt/redline --main-scene res://dedicated_server.tscn
+4. Check log output for:
+   Redline dedicated server listening on port 2457
+
+How to connect from game client
+-------------------------------
+1. Run the game.
+2. PLAY
+3. ONLINE
+4. In IP field enter public server IP (or local LAN IP)
+5. Click JOIN
+
+Local test on one PC
+--------------------
+1. Start dedicated server command.
+2. Run game.
+3. PLAY -> ONLINE
+4. Enter 127.0.0.1
+5. JOIN
+
+Notes
+-----
+- If JOIN does not work from outside your LAN, check router port forwarding:
+  external UDP 2457 -> server local IP UDP 2457.
+- If server process starts but clients cannot connect, firewall is usually the reason.
